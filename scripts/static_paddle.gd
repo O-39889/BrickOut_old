@@ -1,12 +1,11 @@
 extends StaticBody2D;
+# StaticBody2D-based paddle (instead of KinematicBody2D).
+# Its main use is to eliminate that weird bug when the KinematicBody2D
+# paddle, even though it's not told to move, is still being pushed
+# down by a ball in some cases (although I hope I fixed this thing
+# and balls won't get 'jammed' like this (why did I write dis))
 
-
-func _ready() -> void:
-	# all code controlling the mouse cursor should be later
-	# moved to the Main node
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
-	position.x = get_viewport_rect().size.x / 2 - 90;
-	position.y = get_viewport_rect().size.y - 30;
+var current_width: int = 180;
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -14,4 +13,4 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event is InputEventMouseMotion:
 			position.x += event.relative.x * Global.mouse_sensitivity;
 			position.x = clamp(position.x, 0,
-					get_viewport_rect().size.x - 180);
+					get_viewport_rect().size.x - current_width);
