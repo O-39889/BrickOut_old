@@ -26,11 +26,6 @@ func _physics_process(delta):
 	# debug stuff
 	if Input.is_action_just_pressed("enter"):
 		get_tree().reload_current_scene();
-	if Input.is_action_just_pressed("f1"):
-		for wall in get_tree().get_nodes_in_group("walls"):
-			print(wall.get_node("CollisionShape2D").shape.a);
-			print(wall.get_node("CollisionShape2D").shape.b);
-			print("");
 
 
 func _init_walls() -> void:
