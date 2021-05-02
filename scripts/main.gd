@@ -40,10 +40,22 @@ func _physics_process(delta):
 func create_ball(pos: Vector2,
 		velocity: Vector2 = Vector2.UP * Global.BALL_SPEEDS[Global.BallSpeeds.BSPEED_DEFAULT]) -> void:
 	var ball := Ball.instance();
+	
 	ball.position = pos;
 	ball.vel = velocity;
 	balls.append(ball);
+	ball.connect("hit_brick", self, "_on_Ball_hit_brick");
+	
 	add_child(ball);
+
+
+func _on_Ball_hit_brick(ball: KinematicBody2D,
+		collision: KinematicCollision2D) -> void:
+	# for some reason, you cannot access the 'modulate' property
+	# of collision.collider (StaticBody2D, even though it inherits
+	# CanvasItem)
+	assert(collision.collider.has_method("hit"));
+	collision.collider.call("hit", ball);
 
 
 func _init_walls() -> void:
