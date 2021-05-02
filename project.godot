@@ -17,6 +17,10 @@ _global_script_class_icons={
 config/name="Nente's BrickOut!"
 config/icon="res://assets/icon.png"
 
+[autoload]
+
+Global="*res://scenes/Global.tscn"
+
 [display]
 
 window/dpi/allow_hidpi=true
