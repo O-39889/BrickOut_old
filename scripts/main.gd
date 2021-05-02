@@ -47,7 +47,7 @@ func _reset_paddle() -> void:
 
 
 func _init_ball() -> void:
-	var vec: Vector2 = Vector2(15, 15);
+	var vec: Vector2 = Vector2(320, 320);
 	var ball := Ball.instance();
 	ball.position = vec;
 	balls.append(ball);

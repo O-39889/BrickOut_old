@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Paddle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Wall.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Brick.tscn" type="PackedScene" id=4]
 
 [sub_resource type="SegmentShape2D" id=1]
 b = Vector2( 0, 0 )
@@ -32,6 +33,51 @@ shape = SubResource( 2 )
 
 [node name="CollisionShape2D" parent="Ceiling" index="0"]
 shape = SubResource( 3 )
+
+[node name="Brick" parent="." instance=ExtResource( 4 )]
+position = Vector2( 280, 120 )
+
+[node name="Brick2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 380, 120 )
+
+[node name="Brick3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 480, 120 )
+
+[node name="Brick4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 580, 120 )
+
+[node name="Brick5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 680, 120 )
+
+[node name="Brick6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 280, 160 )
+
+[node name="Brick7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 380, 160 )
+
+[node name="Brick8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 480, 160 )
+
+[node name="Brick9" parent="." instance=ExtResource( 4 )]
+position = Vector2( 580, 160 )
+
+[node name="Brick10" parent="." instance=ExtResource( 4 )]
+position = Vector2( 680, 160 )
+
+[node name="Brick11" parent="." instance=ExtResource( 4 )]
+position = Vector2( 280, 200 )
+
+[node name="Brick12" parent="." instance=ExtResource( 4 )]
+position = Vector2( 380, 200 )
+
+[node name="Brick13" parent="." instance=ExtResource( 4 )]
+position = Vector2( 480, 200 )
+
+[node name="Brick14" parent="." instance=ExtResource( 4 )]
+position = Vector2( 580, 200 )
+
+[node name="Brick15" parent="." instance=ExtResource( 4 )]
+position = Vector2( 680, 200 )
 
 [editable path="WallL"]
 [editable path="WallR"]

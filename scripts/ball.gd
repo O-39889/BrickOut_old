@@ -1,7 +1,7 @@
 extends KinematicBody2D;
 
 
-signal hit(ball, collision);
+signal hit_brick(ball, collision);
 
 const BALL_SPEED: int = 250;
 var vel: Vector2 = Vector2.ZERO;
@@ -17,7 +17,8 @@ func _physics_process(delta: float) -> void:
 		if collision.collider.is_in_group("walls"):
 			vel = vel.bounce(collision.normal);
 		elif collision.collider.is_in_group("bricks"):
-			pass;
+			emit_signal("hit_brick", self, collision);
+			vel = vel.bounce(collision.normal);
 		elif collision.collider.is_in_group("paddle"):
 			var paddle_pos: Vector2 = collision.collider.position;
 			var width: float = collision.collider.current_width;
