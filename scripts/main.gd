@@ -5,8 +5,8 @@ extends Node2D;
 
 const Ball := preload("res://scenes/Ball.tscn");
 
-onready var window_width: float = get_viewport_rect().size.x;
-onready var window_height: float = get_viewport_rect().size.y;
+onready var screen_width: float = get_viewport_rect().size.x;
+onready var screen_height: float = get_viewport_rect().size.y;
 
 var balls: Array = [];
 
@@ -34,10 +34,10 @@ func _physics_process(delta):
 
 
 func _init_walls() -> void:
-	wall_l.init_wall(Vector2(0, 0), Vector2(0, window_height));
-	wall_r.init_wall(Vector2(window_width, 0),
-			Vector2(window_width, window_height));
-	ceiling.init_wall(Vector2(0, 0), Vector2(window_width, 0));
+	wall_l.init_wall(Vector2(0, 0), Vector2(0, screen_height));
+	wall_r.init_wall(Vector2(screen_width, 0),
+			Vector2(screen_width, screen_height));
+	ceiling.init_wall(Vector2(0, 0), Vector2(screen_width, 0));
 #	$WallL/CollisionShape2D.shape.b.y = get_viewport_rect().size.y;
 #
 #	$WallR/CollisionShape2D.shape.a.x = get_viewport_rect().size.x;
@@ -48,8 +48,8 @@ func _init_walls() -> void:
 
 
 func _reset_paddle() -> void:
-	var vec: Vector2 = Vector2((window_width - paddle.current_width) / 2,
-			window_height - 30);
+	var vec: Vector2 = Vector2((screen_width - paddle.current_width) / 2,
+			screen_height - 30);
 	paddle.position = vec;
 
 
