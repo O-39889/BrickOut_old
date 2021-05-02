@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/wall.gd" type="Script" id=1]
+
+[sub_resource type="SegmentShape2D" id=1]
+resource_local_to_scene = true
+b = Vector2( 0, 0 )
+
+[node name="Wall" type="StaticBody2D" groups=[
+"walls",
+]]
+collision_mask = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
