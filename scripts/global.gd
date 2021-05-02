@@ -55,3 +55,5 @@ var ball_current_speed: int = BALL_SPEEDS[BallSpeeds.BSPEED_DEFAULT];
 
 # why not just use class_name (if it works as I expect) and put constants
 # in their respective nodes?
+
+var mouse_sensitivity: float = PI;
