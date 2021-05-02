@@ -48,11 +48,9 @@ func _init_walls() -> void:
 
 
 func _reset_paddle() -> void:
-	var vec: Vector2 = Vector2((get_viewport_rect().size.x -
-			$Paddle/CollisionShape2D.shape.b.x) / 2,
-			get_viewport_rect().size.y - 30)
-	
-	$Paddle.position = vec;
+	var vec: Vector2 = Vector2((window_width - paddle.current_width) / 2,
+			window_height - 30);
+	paddle.position = vec;
 
 
 func _init_ball() -> void:
