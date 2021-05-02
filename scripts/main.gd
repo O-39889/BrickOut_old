@@ -38,13 +38,6 @@ func _init_walls() -> void:
 	wall_r.init_wall(Vector2(screen_width, 0),
 			Vector2(screen_width, screen_height));
 	ceiling.init_wall(Vector2(0, 0), Vector2(screen_width, 0));
-#	$WallL/CollisionShape2D.shape.b.y = get_viewport_rect().size.y;
-#
-#	$WallR/CollisionShape2D.shape.a.x = get_viewport_rect().size.x;
-#	$WallR/CollisionShape2D.shape.b.x = get_viewport_rect().size.x;
-#	$WallR/CollisionShape2D.shape.b.y = get_viewport_rect().size.y;
-#
-#	$Ceiling/CollisionShape2D.shape.b.x = get_viewport_rect().size.x
 
 
 func _reset_paddle() -> void:
