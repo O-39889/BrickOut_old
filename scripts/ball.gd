@@ -7,10 +7,6 @@ const BALL_SPEED: int = 250;
 var vel: Vector2 = Vector2.ZERO;
 
 
-func _ready() -> void:
-	vel = Vector2(1, 1).normalized() * BALL_SPEED;
-
-
 func _physics_process(delta: float) -> void:
 	var collision: KinematicCollision2D = move_and_collide(vel * delta);
 	if collision:

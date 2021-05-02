@@ -19,13 +19,31 @@ onready var paddle := get_node("Paddle");
 func _ready() -> void:
 	_init_walls();
 	_reset_paddle();
-	_init_ball();
+	var pos: Vector2 = Vector2(paddle.position.x + paddle.current_width / 2,
+				paddle.position.y - Global.BALL_SIZES[Global.BallSizes.BSIZE_DEFAULT] * 2);
+	create_ball(pos);
 
 
 func _physics_process(delta):
 	# debug stuff
 	if Input.is_action_just_pressed("enter"):
+		# lol, if you just spam enter, the paddle slowly starts to
+		# sink down (because — shhh — KinematicBody2D actually sucks)
+		# (or maybe it doesn't) (or maybe it does)
+		var pos: Vector2 = Vector2(paddle.position.x + paddle.current_width / 2,
+				paddle.position.y - Global.BALL_SIZES[Global.BallSizes.BSIZE_DEFAULT]);
+		create_ball(pos);
+	if Input.is_action_just_pressed("f1"):
 		get_tree().reload_current_scene();
+
+
+func create_ball(pos: Vector2,
+		velocity: Vector2 = Vector2.UP * Global.BALL_SPEEDS[Global.BallSpeeds.BSPEED_DEFAULT]) -> void:
+	var ball := Ball.instance();
+	ball.position = pos;
+	ball.vel = velocity;
+	balls.append(ball);
+	add_child(ball);
 
 
 func _init_walls() -> void:
@@ -39,11 +57,3 @@ func _reset_paddle() -> void:
 	var vec: Vector2 = Vector2((screen_width - paddle.current_width) / 2,
 			screen_height - 30);
 	paddle.position = vec;
-
-
-func _init_ball() -> void:
-	var vec: Vector2 = Vector2(320, 320);
-	var ball := Ball.instance();
-	ball.position = vec;
-	balls.append(ball);
-	add_child(ball);
