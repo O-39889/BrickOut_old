@@ -13,7 +13,7 @@ var balls: Array = [];
 onready var wall_l := get_node("WallL");
 onready var wall_r := get_node("WallR");
 onready var ceiling := get_node("Ceiling");
-onready var paddle := get_node("Paddle");
+onready var paddle := get_node("StaticPaddle");
 
 var _mouse_captured: bool = false;
 
