@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Paddle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Wall.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/Brick.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/RegularBrick.tscn" type="PackedScene" id=4]
 
 [sub_resource type="SegmentShape2D" id=1]
 b = Vector2( 0, 0 )
@@ -32,52 +32,137 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D" parent="Ceiling" index="0"]
 shape = SubResource( 3 )
 
-[node name="Brick" parent="." instance=ExtResource( 4 )]
-position = Vector2( 280, 120 )
-
-[node name="Brick2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 380, 120 )
-
-[node name="Brick3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 480, 120 )
-
-[node name="Brick4" parent="." instance=ExtResource( 4 )]
-position = Vector2( 580, 120 )
-
-[node name="Brick5" parent="." instance=ExtResource( 4 )]
-position = Vector2( 680, 120 )
-
-[node name="Brick6" parent="." instance=ExtResource( 4 )]
-position = Vector2( 280, 160 )
-
-[node name="Brick7" parent="." instance=ExtResource( 4 )]
-position = Vector2( 380, 160 )
-
-[node name="Brick8" parent="." instance=ExtResource( 4 )]
-position = Vector2( 480, 160 )
-
-[node name="Brick9" parent="." instance=ExtResource( 4 )]
-position = Vector2( 580, 160 )
-
-[node name="Brick10" parent="." instance=ExtResource( 4 )]
-position = Vector2( 680, 160 )
-
-[node name="Brick11" parent="." instance=ExtResource( 4 )]
-position = Vector2( 280, 200 )
-
-[node name="Brick12" parent="." instance=ExtResource( 4 )]
-position = Vector2( 380, 200 )
-
-[node name="Brick13" parent="." instance=ExtResource( 4 )]
-position = Vector2( 480, 200 )
-
-[node name="Brick14" parent="." instance=ExtResource( 4 )]
-position = Vector2( 580, 200 )
-
-[node name="Brick15" parent="." instance=ExtResource( 4 )]
-position = Vector2( 680, 200 )
-
 [node name="Paddle" parent="." instance=ExtResource( 2 )]
+
+[node name="RegularBrick" parent="." instance=ExtResource( 4 )]
+position = Vector2( 60, 235 )
+
+[node name="RegularBrick2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 160, 235 )
+
+[node name="RegularBrick3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 260, 235 )
+
+[node name="RegularBrick4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 360, 235 )
+
+[node name="RegularBrick5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 460, 235 )
+
+[node name="RegularBrick6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 560, 235 )
+
+[node name="RegularBrick7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 660, 235 )
+
+[node name="RegularBrick8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 760, 235 )
+
+[node name="RegularBrick9" parent="." instance=ExtResource( 4 )]
+position = Vector2( 860, 235 )
+
+[node name="RegularBrick10" parent="." instance=ExtResource( 4 )]
+position = Vector2( 960, 235 )
+
+[node name="RegularBrick11" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0.65, 0, 1 )
+position = Vector2( 60, 195 )
+health = 4
+
+[node name="RegularBrick12" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0.65, 0, 1 )
+position = Vector2( 160, 195 )
+health = 4
+
+[node name="RegularBrick13" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0.65, 0, 1 )
+position = Vector2( 260, 195 )
+health = 4
+
+[node name="RegularBrick14" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0.65, 0, 1 )
+position = Vector2( 360, 195 )
+health = 4
+
+[node name="RegularBrick15" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0.65, 0, 1 )
+position = Vector2( 460, 195 )
+health = 4
+
+[node name="RegularBrick16" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0.65, 0, 1 )
+position = Vector2( 560, 195 )
+health = 4
+
+[node name="RegularBrick17" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0.65, 0, 1 )
+position = Vector2( 660, 195 )
+health = 4
+
+[node name="RegularBrick18" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0.65, 0, 1 )
+position = Vector2( 760, 195 )
+health = 4
+
+[node name="RegularBrick19" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0.65, 0, 1 )
+position = Vector2( 860, 195 )
+health = 4
+
+[node name="RegularBrick20" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0.65, 0, 1 )
+position = Vector2( 960, 195 )
+health = 4
+
+[node name="RegularBrick21" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 60, 155 )
+health = 6
+
+[node name="RegularBrick22" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 160, 155 )
+health = 6
+
+[node name="RegularBrick23" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 260, 155 )
+health = 6
+
+[node name="RegularBrick24" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 360, 155 )
+health = 6
+
+[node name="RegularBrick25" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 460, 155 )
+health = 6
+
+[node name="RegularBrick26" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 560, 155 )
+health = 6
+
+[node name="RegularBrick27" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 660, 155 )
+health = 6
+
+[node name="RegularBrick28" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 760, 155 )
+health = 6
+
+[node name="RegularBrick29" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 860, 155 )
+health = 6
+
+[node name="RegularBrick30" parent="." instance=ExtResource( 4 )]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 960, 155 )
+health = 6
 
 [editable path="WallL"]
 [editable path="WallR"]
