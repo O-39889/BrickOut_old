@@ -28,14 +28,16 @@ func _ready() -> void:
 
 func _physics_process(delta):
 	# debug stuff
-	if Input.is_action_just_pressed("enter"):
-		# lol, if you just spam enter, the paddle slowly starts to
-		# sink down (because — shhh — KinematicBody2D actually sucks)
-		# (or maybe it doesn't) (or maybe it does)
+	if Input.is_action_just_pressed("debug_space"):
 		var pos: Vector2 = Vector2(paddle.position.x + paddle.current_width / 2,
 				paddle.position.y - Global.BALL_SIZES[Global.BallSizes.BSIZE_DEFAULT]);
 		create_ball(pos);
-	if Input.is_action_just_pressed("f1"):
+	if Input.is_action_just_pressed("debug_r"):
+		# this fixes the bug with balls emitting the signal
+		# at level restart; however, this is only some debug
+		# stuff, so I'm going to rewrite it later anyway
+#		for b in balls:
+#			b.disconnect("lost", self, "_on_Ball_lost");
 		get_tree().reload_current_scene();
 
 
@@ -66,11 +68,9 @@ func _on_Ball_hit_brick(ball: KinematicBody2D,
 
 func _on_Ball_lost(ball: KinematicBody2D) -> void:
 	balls.erase(ball);
-	print("Ball lost at ",
-			ball.position.y - screen_height, "! :(");
+	print("Ball lost! :(");
 	ball.queue_free();
 	if balls.empty():
-		print("Epic fail\n");
 		# calling reload_current_scene() for some reason causes
 		# the VisibilityNotifiers2D in remaining balls to emit
 		# screen_exited signal
