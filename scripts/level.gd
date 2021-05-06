@@ -50,6 +50,7 @@ func create_ball(pos: Vector2,
 	ball.vel = velocity;
 	balls.append(ball);
 	ball.connect("hit_brick", self, "_on_Ball_hit_brick");
+	ball.connect("lost", self, "_on_Ball_lost");
 	
 	add_child(ball);
 
@@ -61,6 +62,19 @@ func _on_Ball_hit_brick(ball: KinematicBody2D,
 	# CanvasItem)
 	assert(collision.collider.has_method("hit"));
 	collision.collider.call("hit", ball);
+
+
+func _on_Ball_lost(ball: KinematicBody2D) -> void:
+	balls.erase(ball);
+	print("Ball lost at ",
+			ball.position.y - screen_height, "! :(");
+	ball.queue_free();
+	if balls.empty():
+		print("Epic fail\n");
+		# calling reload_current_scene() for some reason causes
+		# the VisibilityNotifiers2D in remaining balls to emit
+		# screen_exited signal
+		get_tree().reload_current_scene();
 
 
 func _unhandled_input(event):

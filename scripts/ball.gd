@@ -2,9 +2,16 @@ extends KinematicBody2D;
 
 
 signal hit_brick(ball, collision);
+signal lost(ball);
 
 const BALL_SPEED: int = 250;
 var vel: Vector2 = Vector2.ZERO;
+
+
+func _ready() -> void:
+	var max_size: int = Global.BALL_SIZES[Global.BallSizes.BSIZE_LARGE];
+	$VisibilityNotifier2D.rect = Rect2(-max_size, -max_size,
+			max_size * 2, max_size * 2);
 
 
 func _physics_process(delta: float) -> void:
@@ -33,3 +40,7 @@ func _paddle_bounce(collision_point: Vector2,
 	
 	var vec: Vector2 = Vector2.UP.rotated(deg2rad(rot));
 	return vec;
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	emit_signal("lost", self);

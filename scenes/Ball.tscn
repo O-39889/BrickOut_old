@@ -24,3 +24,7 @@ modulate = Color( 0, 0.858824, 1, 1 )
 position = Vector2( 0, -3.38813e-21 )
 scale = Vector2( 0.46875, 0.46875 )
 texture = ExtResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
