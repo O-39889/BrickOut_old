@@ -1,6 +1,4 @@
 extends Node2D;
-# Script for Main scene (more like a level template actually: will
-# contain all the stuff necessary specifically for gameplay)
 
 
 const Ball := preload("res://scenes/Ball.tscn");
@@ -44,7 +42,6 @@ func _physics_process(delta):
 # apparently, what Git didn't like is that, despite these functions being
 # separate and not conflicting with each other, they used to occupy the
 # same lines lol
-#<<<<<<< HEAD
 func create_ball(pos: Vector2,
 		velocity: Vector2 = Vector2.UP * Global.BALL_SPEEDS[Global.BallSpeeds.BSPEED_DEFAULT]) -> void:
 	var ball := Ball.instance();
@@ -64,7 +61,8 @@ func _on_Ball_hit_brick(ball: KinematicBody2D,
 	# CanvasItem)
 	assert(collision.collider.has_method("hit"));
 	collision.collider.call("hit", ball);
-#=======
+
+
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_RIGHT:
@@ -88,7 +86,6 @@ func set_mouse_capture(captured: bool) -> void:
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE);
 		_mouse_captured = false;
-#>>>>>>> static_paddle
 
 
 func _init_walls() -> void:
