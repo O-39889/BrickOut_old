@@ -15,8 +15,12 @@ onready var wall_r := get_node("WallR");
 onready var ceiling := get_node("Ceiling");
 onready var paddle := get_node("Paddle");
 
+var _mouse_captured: bool = false;
+
 
 func _ready() -> void:
+	set_mouse_capture(true);
+	
 	_init_walls();
 	_reset_paddle();
 	var pos: Vector2 = Vector2(paddle.position.x + paddle.current_width / 2,
@@ -37,6 +41,10 @@ func _physics_process(delta):
 		get_tree().reload_current_scene();
 
 
+# apparently, what Git didn't like is that, despite these functions being
+# separate and not conflicting with each other, they used to occupy the
+# same lines lol
+#<<<<<<< HEAD
 func create_ball(pos: Vector2,
 		velocity: Vector2 = Vector2.UP * Global.BALL_SPEEDS[Global.BallSpeeds.BSPEED_DEFAULT]) -> void:
 	var ball := Ball.instance();
@@ -56,6 +64,31 @@ func _on_Ball_hit_brick(ball: KinematicBody2D,
 	# CanvasItem)
 	assert(collision.collider.has_method("hit"));
 	collision.collider.call("hit", ball);
+#=======
+func _unhandled_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_RIGHT:
+			if event.pressed and _mouse_captured:
+				set_mouse_capture(false);
+				print("Paused!");
+		elif event.button_index == BUTTON_LEFT:
+			if event.pressed and not _mouse_captured:
+				set_mouse_capture(true);
+				print("Unpaused!");
+
+
+# I don't remember why I created this function; as you can see, its
+# main purpose is to ensure that _mouse_captured property is always
+# in sync with the mouse mode; however, I really cannot remember
+# why did I need the _mouse_captured property in the first place
+func set_mouse_capture(captured: bool) -> void:
+	if captured:
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
+		_mouse_captured = true;
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE);
+		_mouse_captured = false;
+#>>>>>>> static_paddle
 
 
 func _init_walls() -> void:
