@@ -36,8 +36,8 @@ func _physics_process(delta):
 		_init_ball(create_ball(pos));
 	if Input.is_action_just_pressed("debug_r"):
 		# this fixes the bug with balls emitting the signal
-		# at level restart; however, this is only some debug
-		# stuff, so I'm going to rewrite it later anyway
+		# at level restart; anyway, this is only for debugging,
+		# and I'm going to handle level restart differently
 #		for b in balls:
 #			b.disconnect("lost", self, "_on_Ball_lost");
 		get_tree().reload_current_scene();
