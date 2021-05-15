@@ -48,7 +48,6 @@ func _physics_process(delta):
 		add_child(powerup);
 
 
-# stil ouch
 func _on_Ball_hit(ball: KinematicBody2D,
 		collision: KinematicCollision2D) -> void:
 	if collision.collider.has_method("hit"):
