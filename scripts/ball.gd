@@ -1,7 +1,7 @@
 extends KinematicBody2D;
 
 
-signal hit_brick(ball, collision);
+signal hit(ball, collision);
 signal lost(ball);
 
 const BALL_SPEED: int = 250;
@@ -17,16 +17,20 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var collision: KinematicCollision2D = move_and_collide(vel * delta);
 	if collision:
-		if collision.collider.is_in_group("walls"):
-			vel = vel.bounce(collision.normal);
-		elif collision.collider.is_in_group("bricks"):
-			emit_signal("hit_brick", self, collision);
-			vel = vel.bounce(collision.normal);
-		elif collision.collider.is_in_group("paddle"):
+		emit_signal("hit", self, collision);
+		if collision.collider.is_in_group("paddle"):
+			# most of the guides do not recommend using tight
+			# coupling like here; maybe I really should rewrite
+			# the code and delegate calculating the collision response
+			# to the Level node; however, I have some questions
+			# regarding the order of execution across several nodes.
+			# I guess I'll need to experiment with this sometime later.
 			var paddle_pos: Vector2 = collision.collider.position;
 			var width: float = collision.collider.current_width;
 			vel = BALL_SPEED * _paddle_bounce(collision.position,
 					paddle_pos, width);
+		else:
+			vel = vel.bounce(collision.normal);
 
 
 func _paddle_bounce(collision_point: Vector2,

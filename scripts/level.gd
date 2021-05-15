@@ -48,14 +48,11 @@ func _physics_process(delta):
 		add_child(powerup);
 
 
-# ouch
-func _on_Ball_hit_brick(ball: KinematicBody2D,
+# stil ouch
+func _on_Ball_hit(ball: KinematicBody2D,
 		collision: KinematicCollision2D) -> void:
-	# for some reason, you cannot access the 'modulate' property
-	# of collision.collider (StaticBody2D, even though it inherits
-	# CanvasItem)
-	assert(collision.collider.has_method("hit"));
-	collision.collider.call("hit", ball);
+	if collision.collider.has_method("hit"):
+		collision.collider.call("hit", ball);
 
 
 func _on_Ball_lost(ball: KinematicBody2D) -> void:
@@ -112,7 +109,7 @@ func create_powerup(pos: Vector2) -> KinematicBody2D:
 
 func _init_ball(ball: KinematicBody2D) -> void:
 	balls.append(ball);
-	ball.connect("hit_brick", self, "_on_Ball_hit_brick");
+	ball.connect("hit", self, "_on_Ball_hit");
 	ball.connect("lost", self, "_on_Ball_lost");
 	add_child(ball);
 
