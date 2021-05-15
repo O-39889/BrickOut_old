@@ -2,11 +2,13 @@ extends Node2D;
 
 
 const Ball := preload("res://scenes/Ball.tscn");
+const Powerup := preload("res://scenes/Powerup.tscn");
 
 onready var screen_width: float = get_viewport_rect().size.x;
 onready var screen_height: float = get_viewport_rect().size.y;
 
 var balls: Array = [];
+var powerups: Array = [];
 
 onready var wall_l := get_node("WallL");
 onready var wall_r := get_node("WallR");
@@ -39,6 +41,11 @@ func _physics_process(delta):
 #		for b in balls:
 #			b.disconnect("lost", self, "_on_Ball_lost");
 		get_tree().reload_current_scene();
+	if Input.is_action_just_pressed("debug_1"):
+		var powerup = create_powerup(Vector2(screen_width,
+						screen_height) / 2);
+		powerups.append(powerup);
+		add_child(powerup);
 
 
 # apparently, what Git didn't like is that, despite these functions being
@@ -57,6 +64,7 @@ func create_ball(pos: Vector2,
 	add_child(ball);
 
 
+# ouch
 func _on_Ball_hit_brick(ball: KinematicBody2D,
 		collision: KinematicCollision2D) -> void:
 	# for some reason, you cannot access the 'modulate' property
@@ -100,6 +108,12 @@ func set_mouse_capture(captured: bool) -> void:
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE);
 		_mouse_captured = false;
+
+
+func create_powerup(pos: Vector2) -> KinematicBody2D:
+	var powerup := Powerup.instance();
+	powerup.position = pos;
+	return (powerup as KinematicBody2D);
 
 
 func _init_walls() -> void:

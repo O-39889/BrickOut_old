@@ -30,7 +30,7 @@ func hit(ball: KinematicBody2D) -> void:
 	#			health -= 2;
 	#		Global.BallSizes.BSIZE_LARGE:
 	#			health -= 4;
-		health -= 1;
+		health -= 2;
 		if health < 0:
 			health = 0;
 		if health == 0:

@@ -53,8 +53,6 @@ var ball_current_size: int = BALL_SIZES[BallSizes.BSIZE_DEFAULT];
 # this one will be very important
 var ball_current_speed: int = BALL_SPEEDS[BallSpeeds.BSPEED_DEFAULT];
 
-# why not just use class_name (if it works as I expect) and put constants
-# in their respective nodes?
 
 # whatever. multiplying it by pi just feels convenient to control
 # (should move it to another singletion with player settings later)
