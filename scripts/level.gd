@@ -25,7 +25,11 @@ func _ready() -> void:
 	_reset_paddle();
 	var pos: Vector2 = Vector2(paddle.position.x + paddle.current_width / 2,
 				paddle.position.y - Global.BALL_SIZES[Global.BallSizes.BSIZE_DEFAULT] * 2);
-	create_ball(pos);
+	var ball: KinematicBody2D = create_ball(pos);
+	balls.append(ball);
+	ball.connect("hit_brick", self, "_on_Ball_hit_brick");
+	ball.connect("lost", self, "_on_Ball_lost");
+	add_child(ball);
 
 
 func _physics_process(delta):
@@ -33,7 +37,15 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("debug_space"):
 		var pos: Vector2 = Vector2(paddle.position.x + paddle.current_width / 2,
 				paddle.position.y - Global.BALL_SIZES[Global.BallSizes.BSIZE_DEFAULT]);
-		create_ball(pos);
+		var ball: KinematicBody2D = create_ball(pos);
+		# well, now we have code duplication
+		# I probably could wrap the create_ball() function
+		# in another one (something like `init_ball()`) which would
+		# do all the dirty work
+		balls.append(ball);
+		ball.connect("hit_brick", self, "_on_Ball_hit_brick");
+		ball.connect("lost", self, "_on_Ball_lost");
+		add_child(ball);
 	if Input.is_action_just_pressed("debug_r"):
 		# this fixes the bug with balls emitting the signal
 		# at level restart; however, this is only some debug
@@ -46,22 +58,10 @@ func _physics_process(delta):
 						screen_height) / 2);
 		powerups.append(powerup);
 		add_child(powerup);
-
-
-# apparently, what Git didn't like is that, despite these functions being
-# separate and not conflicting with each other, they used to occupy the
-# same lines lol
-func create_ball(pos: Vector2,
-		velocity: Vector2 = Vector2.UP * Global.BALL_SPEEDS[Global.BallSpeeds.BSPEED_DEFAULT]) -> void:
-	var ball := Ball.instance();
-	
-	ball.position = pos;
-	ball.vel = velocity;
-	balls.append(ball);
-	ball.connect("hit_brick", self, "_on_Ball_hit_brick");
-	ball.connect("lost", self, "_on_Ball_lost");
-	
-	add_child(ball);
+	if Input.is_action_just_pressed("debug_2"):
+		print(balls);
+		print(powerups);
+		print();
 
 
 # ouch
@@ -110,10 +110,20 @@ func set_mouse_capture(captured: bool) -> void:
 		_mouse_captured = false;
 
 
+func create_ball(pos: Vector2,
+		velocity: Vector2 = Vector2.UP * Global.BALL_SPEEDS[Global.BallSpeeds.BSPEED_DEFAULT]) -> KinematicBody2D:
+	var ball := Ball.instance();
+	
+	ball.position = pos;
+	ball.vel = velocity;
+	
+	return ball as KinematicBody2D;
+
+
 func create_powerup(pos: Vector2) -> KinematicBody2D:
 	var powerup := Powerup.instance();
 	powerup.position = pos;
-	return (powerup as KinematicBody2D);
+	return powerup as KinematicBody2D;
 
 
 func _init_walls() -> void:
