@@ -25,11 +25,7 @@ func _ready() -> void:
 	_reset_paddle();
 	var pos: Vector2 = Vector2(paddle.position.x + paddle.current_width / 2,
 				paddle.position.y - Global.BALL_SIZES[Global.BallSizes.BSIZE_DEFAULT] * 2);
-	var ball: KinematicBody2D = create_ball(pos);
-	balls.append(ball);
-	ball.connect("hit_brick", self, "_on_Ball_hit_brick");
-	ball.connect("lost", self, "_on_Ball_lost");
-	add_child(ball);
+	_init_ball(create_ball(pos));
 
 
 func _physics_process(delta):
@@ -37,15 +33,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("debug_space"):
 		var pos: Vector2 = Vector2(paddle.position.x + paddle.current_width / 2,
 				paddle.position.y - Global.BALL_SIZES[Global.BallSizes.BSIZE_DEFAULT]);
-		var ball: KinematicBody2D = create_ball(pos);
-		# well, now we have code duplication
-		# I probably could wrap the create_ball() function
-		# in another one (something like `init_ball()`) which would
-		# do all the dirty work
-		balls.append(ball);
-		ball.connect("hit_brick", self, "_on_Ball_hit_brick");
-		ball.connect("lost", self, "_on_Ball_lost");
-		add_child(ball);
+		_init_ball(create_ball(pos));
 	if Input.is_action_just_pressed("debug_r"):
 		# this fixes the bug with balls emitting the signal
 		# at level restart; however, this is only some debug
@@ -58,10 +46,6 @@ func _physics_process(delta):
 						screen_height) / 2);
 		powerups.append(powerup);
 		add_child(powerup);
-	if Input.is_action_just_pressed("debug_2"):
-		print(balls);
-		print(powerups);
-		print();
 
 
 # ouch
@@ -124,6 +108,13 @@ func create_powerup(pos: Vector2) -> KinematicBody2D:
 	var powerup := Powerup.instance();
 	powerup.position = pos;
 	return powerup as KinematicBody2D;
+
+
+func _init_ball(ball: KinematicBody2D) -> void:
+	balls.append(ball);
+	ball.connect("hit_brick", self, "_on_Ball_hit_brick");
+	ball.connect("lost", self, "_on_Ball_lost");
+	add_child(ball);
 
 
 func _init_walls() -> void:
